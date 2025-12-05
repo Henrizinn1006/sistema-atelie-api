@@ -1,0 +1,365 @@
+#:kivy 2.2.1
+#:import rgba kivy.utils.get_color_from_hex
+#:import dp kivy.metrics.dp
+
+<GerenciadorTelas>:
+    LoginScreen:
+        name: "login"
+    CadastroScreen:
+        name: "cadastro"
+    RecuperarScreen:
+        name: "recuperar"
+    TelaCodigo:
+        name: "codigo"
+    TelaNovaSenha:
+        name: "nova_senha"
+
+
+<LoginScreen>:
+    MDFloatLayout:
+
+        Image:
+            source: "telas/imagens/fundo.png"
+            allow_stretch: True
+            keep_ratio: False
+            size_hint: 2, 2
+            pos_hint: {"center_x": .5, "center_y": .5}
+
+        MDLabel:
+            text: "EventPlus"
+            font_style: "H4"
+            font_name: "telas/fontes/Poppins-SemiBold.ttf"
+            halign: "center"
+            pos_hint: {"center_x": .5, "top": 0.94}
+            theme_text_color: "Custom"
+            text_color: rgba("#281f20")
+
+        MDCard:
+            size_hint: 0.9, 0.55
+            pos_hint: {"center_x": 0.5, "center_y": 0.47}
+            md_bg_color: rgba("#fbe2b9")
+            radius: [20, 20, 20, 20]
+            elevation: 6
+
+            BoxLayout:
+                orientation: "vertical"
+                padding: dp(20)
+                spacing: dp(15)
+
+                MDLabel:
+                    text: "Login"
+                    font_style: "H6"
+                    font_name: "telas/fontes/Poppins-SemiBold.ttf"
+                    halign: "center"
+                    theme_text_color: "Custom"
+                    text_color: rgba("#281f20")
+
+                MDTextField:
+                    id: nome_input
+                    hint_text: "Nome de usuário"
+                    mode: "rectangle"
+                    font_name: "telas/fontes/Inter-Regular.ttf"
+
+                MDTextField:
+                    id: senha_input
+                    hint_text: "Senha"
+                    password: True
+                    mode: "rectangle"
+                    font_name: "telas/fontes/Inter-Regular.ttf"
+
+                MDLabel:
+                    id: msg
+                    text: ""
+                    theme_text_color: "Custom"
+                    text_color: 1, 0, 0, 1
+                    halign: "center"
+                    font_name: "telas/fontes/Inter-Regular.ttf"
+                    font_size: "12sp"
+
+                MDRaisedButton:
+                    text: "Entrar"
+                    md_bg_color: rgba("#281f20")
+                    text_color: 1, 1, 1, 1
+                    font_name: "telas/fontes/Poppins-SemiBold.ttf"
+                    pos_hint: {"center_x": 0.5}
+                    on_release: root.fazer_login()
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(40)
+                    spacing: dp(10)
+
+                    MDTextButton:
+                        text: "Criar nova conta"
+                        font_name: "telas/fontes/Poppins-Regular.ttf"
+                        theme_text_color: "Custom"
+                        text_color: rgba("#281f20")
+                        on_release: root.abrir_cadastro()
+
+                    MDTextButton:
+                        text: "Esqueceu a senha?"
+                        font_name: "telas/fontes/Poppins-Regular.ttf"
+                        theme_text_color: "Custom"
+                        text_color: rgba("#281f20")
+                        on_release: root.abrir_recuperacao()
+
+
+
+<CadastroScreen>:
+    MDFloatLayout:
+
+        Image:
+            source: "telas/imagens/fundo.png"
+            allow_stretch: True
+            keep_ratio: False
+            size_hint: 2, 2
+            pos_hint: {"center_x": .5, "center_y": .5}
+
+        MDTopAppBar:
+            title: "Criar conta"
+            elevation: 0
+            md_bg_color: rgba("#fbe2b9")
+            specific_text_color: rgba("#281f20")
+            left_action_items: [["arrow-left", lambda x: (setattr(app.root.transition, "direction", "right"), setattr(app.root, "current", "login"))]]
+
+        MDCard:
+            size_hint: 0.92, 0.62
+            pos_hint: {"center_x": 0.5, "center_y": 0.45}
+            md_bg_color: rgba("#fcf6d2")
+            radius: [20, 20, 20, 20]
+            elevation: 5
+
+            BoxLayout:
+                orientation: "vertical"
+                padding: dp(18)
+                spacing: dp(10)
+
+                MDTextField:
+                    id: nome_input
+                    hint_text: "Nome de usuário"
+                    mode: "rectangle"
+                    font_name: "telas/fontes/Inter-Regular.ttf"
+
+                MDTextField:
+                    id: email_input
+                    hint_text: "E-mail"
+                    mode: "rectangle"
+                    font_name: "telas/fontes/Inter-Regular.ttf"
+
+                MDTextField:
+                    id: senha_input
+                    hint_text: "Senha"
+                    password: True
+                    mode: "rectangle"
+                    font_name: "telas/fontes/Inter-Regular.ttf"
+
+                MDTextField:
+                    id: confirmar_input
+                    hint_text: "Confirmar senha"
+                    password: True
+                    mode: "rectangle"
+                    font_name: "telas/fontes/Inter-Regular.ttf"
+
+                MDLabel:
+                    id: msg
+                    text: ""
+                    theme_text_color: "Custom"
+                    text_color: 1, 0, 0, 1
+                    font_size: "12sp"
+                    halign: "center"
+                    font_name: "telas/fontes/Inter-Regular.ttf"
+
+                MDRaisedButton:
+                    text: "Cadastrar"
+                    md_bg_color: rgba("#281f20")
+                    text_color: 1, 1, 1, 1
+                    font_name: "telas/fontes/Poppins-SemiBold.ttf"
+                    pos_hint: {"center_x": 0.5}
+                    on_release: root.cadastrar()
+
+
+
+<RecuperarScreen>:
+    MDFloatLayout:
+
+        Image:
+            source: "telas/imagens/fundo.png"
+            allow_stretch: True
+            keep_ratio: False
+            size_hint: 2, 2
+            pos_hint: {"center_x": .5, "center_y": .5}
+
+        MDTopAppBar:
+            title: "Recuperar senha"
+            elevation: 0
+            md_bg_color: rgba("#fbe2b9")
+            specific_text_color: rgba("#281f20")
+            left_action_items: [["arrow-left", lambda x: (setattr(app.root.transition, "direction", "right"), setattr(app.root, "current", "login"))]]
+
+        MDCard:
+            size_hint: 0.92, 0.5
+            pos_hint: {"center_x": 0.5, "center_y": 0.45}
+            md_bg_color: rgba("#fcf6d2")
+            radius: [20, 20, 20, 20]
+
+            BoxLayout:
+                orientation: "vertical"
+                padding: dp(18)
+                spacing: dp(12)
+
+                MDLabel:
+                    text: "Digite seu e-mail cadastrado"
+                    halign: "center"
+                    font_name: "telas/fontes/Inter-Regular.ttf"
+                    theme_text_color: "Custom"
+                    text_color: rgba("#281f20")
+
+                MDTextField:
+                    id: email_input
+                    hint_text: "E-mail"
+                    mode: "rectangle"
+                    font_name: "telas/fontes/Inter-Regular.ttf"
+
+                MDLabel:
+                    id: msg
+                    text: ""
+                    theme_text_color: "Custom"
+                    text_color: 1, 0, 0, 1
+                    halign: "center"
+                    font_name: "telas/fontes/Inter-Regular.ttf"
+                    font_size: "12sp"
+
+                MDRaisedButton:
+                    text: "Enviar código"
+                    md_bg_color: rgba("#281f20")
+                    text_color: 1, 1, 1, 1
+                    font_name: "telas/fontes/Poppins-SemiBold.ttf"
+                    pos_hint: {"center_x": 0.5}
+                    on_release: root.recuperar()
+
+
+
+<TelaCodigo>:
+    MDFloatLayout:
+
+        Image:
+            source: "telas/imagens/fundo.png"
+            allow_stretch: True
+            keep_ratio: False
+            size_hint: 2, 2
+            pos_hint: {"center_x": .5, "center_y": .5}
+
+        MDTopAppBar:
+            title: "Código de verificação"
+            elevation: 0
+            md_bg_color: rgba("#fbe2b9")
+            specific_text_color: rgba("#281f20")
+            left_action_items: [["arrow-left", lambda x: (setattr(app.root.transition, "direction", "right"), setattr(app.root, "current", "recuperar"))]]
+
+        MDCard:
+            size_hint: 0.9, 0.45
+            pos_hint: {"center_x": 0.5, "center_y": 0.45}
+            md_bg_color: rgba("#fcf6d2")
+            radius: [20, 20, 20, 20]
+
+            BoxLayout:
+                orientation: "vertical"
+                padding: dp(18)
+                spacing: dp(12)
+
+                MDLabel:
+                    text: "Digite o código enviado para seu e-mail"
+                    halign: "center"
+                    font_name: "telas/fontes/Inter-Regular.ttf"
+                    theme_text_color: "Custom"
+                    text_color: rgba("#281f20")
+
+                MDTextField:
+                    id: codigo_input
+                    hint_text: "Código de 6 dígitos"
+                    max_text_length: 6
+                    input_filter: "int"
+                    mode: "rectangle"
+                    font_name: "telas/fontes/Inter-Regular.ttf"
+
+                MDLabel:
+                    id: msg
+                    text: ""
+                    halign: "center"
+                    theme_text_color: "Custom"
+                    text_color: 1, 0, 0, 1
+                    font_name: "telas/fontes/Inter-Regular.ttf"
+                    font_size: "12sp"
+
+                MDRaisedButton:
+                    text: "Confirmar código"
+                    md_bg_color: rgba("#281f20")
+                    text_color: 1, 1, 1, 1
+                    font_name: "telas/fontes/Poppins-SemiBold.ttf"
+                    pos_hint: {"center_x": 0.5}
+                    on_release: root.confirmar_codigo()
+
+
+
+<TelaNovaSenha>:
+    MDFloatLayout:
+
+        Image:
+            source: "telas/imagens/fundo.png"
+            allow_stretch: True
+            keep_ratio: False
+            size_hint: 2, 2
+            pos_hint: {"center_x": .5, "center_y": .5}
+
+        MDTopAppBar:
+            title: "Nova senha"
+            elevation: 0
+            md_bg_color: rgba("#fbe2b9")
+            specific_text_color: rgba("#281f20")
+            left_action_items: [["arrow-left", lambda x: (setattr(app.root.transition, "direction", "right"), setattr(app.root, "current", "login"))]]
+
+        MDCard:
+            size_hint: 0.9, 0.5
+            pos_hint: {"center_x": 0.5, "center_y": 0.45}
+            md_bg_color: rgba("#fcf6d2")
+            radius: [20, 20, 20, 20]
+
+            BoxLayout:
+                orientation: "vertical"
+                padding: dp(18)
+                spacing: dp(12)
+
+                MDTextField:
+                    id: senha1
+                    hint_text: "Nova senha"
+                    password: True
+                    mode: "rectangle"
+                    font_name: "telas/fontes/Inter-Regular.ttf"
+
+                MDTextField:
+                    id: senha2
+                    hint_text: "Confirmar senha"
+                    password: True
+                    mode: "rectangle"
+                    font_name: "telas/fontes/Inter-Regular.ttf"
+
+                MDLabel:
+                    id: msg
+                    text: ""
+                    halign: "center"
+                    theme_text_color: "Custom"
+                    text_color: 1, 0, 0, 1
+                    font_name: "telas/fontes/Inter-Regular.ttf"
+                    font_size: "12sp"
+
+                MDRaisedButton:
+                    text: "Salvar nova senha"
+                    md_bg_color: rgba("#281f20")
+                    text_color: 1, 1, 1, 1
+                    font_name: "telas/fontes/Poppins-SemiBold.ttf"
+                    pos_hint: {"center_x": 0.5}
+                    on_release: root.salvar_senha()
+
+
+
+

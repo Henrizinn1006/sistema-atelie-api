@@ -1,0 +1,110 @@
+#:kivy 2.2.1
+#:import rgba kivy.utils.get_color_from_hex
+#:import dp kivy.metrics.dp
+
+<HomeScreen>:
+    MDFloatLayout:
+
+        Image:
+            source: "telas/imagens/fundo.png"
+            allow_stretch: True
+            keep_ratio: False
+            size_hint: 2, 2
+            pos_hint: {"center_x": .5, "center_y": .5}
+
+        MDTopAppBar:
+            title: "EventPlus"
+            md_bg_color: rgba("#fbe2b9")
+            specific_text_color: rgba("#281f20")
+            elevation: 0
+            pos_hint: {"top": 1}
+
+        BoxLayout:
+            orientation: "vertical"
+            padding: dp(20), dp(90), dp(20), dp(20)
+            spacing: dp(25)
+
+            MDLabel:
+                text: "Bem-vindo(a)!"
+                font_style: "H5"
+                font_name: "telas/fontes/Poppins-SemiBold.ttf"
+                theme_text_color: "Custom"
+                text_color: rgba("#281f20")
+                size_hint_y: None
+                height: dp(40)
+
+            MDLabel:
+                text: "O que você deseja gerenciar?"
+                font_style: "Body1"
+                font_name: "telas/fontes/Inter-Regular.ttf"
+                theme_text_color: "Custom"
+                text_color: rgba("#281f20")
+                size_hint_y: None
+                height: dp(28)
+
+            BoxLayout:
+                spacing: dp(16)
+                size_hint_y: None
+                height: dp(150)
+
+                MDCard:
+                    md_bg_color: rgba("#fcf6d2")
+                    radius: [20, 20, 20, 20]
+                    ripple_behavior: True
+                    on_release: app.root.current = "catalogo"
+
+                    BoxLayout:
+                        orientation: "vertical"
+                        padding: dp(18)
+                        spacing: dp(8)
+
+                        MDIcon:
+                            icon: "package-variant-closed"
+                            theme_text_color: "Custom"
+                            text_color: rgba("#281f20")
+                            halign: "center"
+
+                        MDLabel:
+                            text: "Catálogo"
+                            font_name: "telas/fontes/Poppins-SemiBold.ttf"
+                            halign: "center"
+                            theme_text_color: "Custom"
+                            text_color: rgba("#281f20")
+
+                MDCard:
+                    md_bg_color: rgba("#fcf6d2")
+                    radius: [20, 20, 20, 20]
+                    ripple_behavior: True
+                    on_release: app.root.current = "eventos"
+
+                    BoxLayout:
+                        orientation: "vertical"
+                        padding: dp(18)
+                        spacing: dp(8)
+
+                        MDIcon:
+                            icon: "calendar-star"
+                            theme_text_color: "Custom"
+                            text_color: rgba("#281f20")
+                            halign: "center"
+
+                        MDLabel:
+                            text: "Eventos"
+                            font_name: "telas/fontes/Poppins-SemiBold.ttf"
+                            halign: "center"
+                            theme_text_color: "Custom"
+                            text_color: rgba("#281f20")
+
+            Widget:
+
+            MDRaisedButton:
+                text: "Sair"
+                md_bg_color: rgba("#281f20")
+                text_color: 1, 1, 1, 1
+                font_name: "telas/fontes/Poppins-SemiBold.ttf"
+                size_hint_y: None
+                height: dp(50)
+                on_release: app.root.current = "login"
+
+
+

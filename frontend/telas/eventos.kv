@@ -1,0 +1,192 @@
+#:kivy 2.2.1
+#:import rgba kivy.utils.get_color_from_hex
+#:import MDRaisedButton kivymd.uix.button.MDRaisedButton
+#:import MDFlatButton kivymd.uix.button.MDFlatButton
+#:import MDIconButton kivymd.uix.button.MDIconButton
+
+<EventosScreen>:
+    name: "eventos"
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: rgba("#fcf6d2")
+
+        MDTopAppBar:
+            title: "Eventos"
+            md_bg_color: rgba("#f4c9a2")
+            title_color: rgba("#281f20")
+            elevation: 0
+            left_action_items: [["arrow-left", lambda x: setattr(root.manager, "current", "home")]]
+
+        ScrollView:
+            MDBoxLayout:
+                id: lista_eventos
+                orientation: "vertical"
+                padding: 10
+                spacing: 10
+                adaptive_height: True
+
+        MDRelativeLayout:
+            size_hint_y: None
+            height: "70dp"
+
+            MDFloatingActionButton:
+                icon: "plus"
+                md_bg_color: rgba("#281f20")
+                icon_color: 1,1,1,1
+                elevation: 0
+                pos_hint: {"center_x": .9, "center_y": .5}
+                on_release: root.popup_novo_evento()
+
+
+
+<DetalhesEventoScreen>:
+    name: "detalhes_evento"
+    MDBoxLayout:
+        orientation: "vertical"
+        md_bg_color: rgba("#fcf6d2")
+
+        MDTopAppBar:
+            title: "Detalhes do Evento"
+            md_bg_color: rgba("#f4c9a2")
+            title_color: rgba("#281f20")
+            elevation: 0
+            left_action_items: [["arrow-left", lambda x: setattr(root.manager, "current", "eventos")]]
+
+        ScrollView:
+            MDBoxLayout:
+                orientation: "vertical"
+                adaptive_height: True
+                spacing: 20
+
+                MDBoxLayout:
+                    id: box_info
+                    orientation: "vertical"
+                    spacing: 12
+                    padding: [20, 15]
+                    size_hint_y: None
+                    adaptive_height: True
+
+                    MDLabel:
+                        id: lbl_titulo
+                        text: ""
+                        font_style: "H5"
+                        bold: True
+                        theme_text_color: "Custom"
+                        text_color: rgba("#281f20")
+                        halign: "left"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+
+                    MDLabel:
+                        id: lbl_data
+                        text: ""
+                        theme_text_color: "Custom"
+                        text_color: rgba("#281f20")
+                        halign: "left"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+
+                    MDLabel:
+                        id: lbl_cliente
+                        text: ""
+                        theme_text_color: "Custom"
+                        text_color: rgba("#281f20")
+                        halign: "left"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+
+                    MDLabel:
+                        id: lbl_endereco
+                        text: ""
+                        theme_text_color: "Custom"
+                        text_color: rgba("#281f20")
+                        halign: "left"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+
+                    MDLabel:
+                        id: lbl_obs
+                        text: ""
+                        theme_text_color: "Custom"
+                        text_color: rgba("#281f20")
+                        halign: "left"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+
+                    MDLabel:
+                        id: lbl_status
+                        text: ""
+                        theme_text_color: "Custom"
+                        text_color: rgba("#281f20")
+                        halign: "left"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+
+                    MDLabel:
+                        text: "Itens do Evento:"
+                        font_style: "H6"
+                        theme_text_color: "Custom"
+                        text_color: rgba("#281f20")
+                        halign: "left"
+                        padding_y: 10
+                        size_hint_y: None
+                        height: self.texture_size[1] + 20
+
+                MDBoxLayout:
+                    id: lista_itens_evento
+                    orientation: "vertical"
+                    spacing: 10
+                    adaptive_height: True
+
+        MDBoxLayout:
+            orientation: "vertical"
+            size_hint_y: None
+            height: "180dp"
+            padding: 10
+            spacing: 8
+            md_bg_color: rgba("#fbe2b9")
+
+            MDBoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "50dp"
+                spacing: 8
+
+                MDRaisedButton:
+                    text: "Adicionar Item"
+                    md_bg_color: rgba("#281f20")
+                    text_color: 1,1,1,1
+                    on_release: root.adicionar_item()
+
+                MDRaisedButton:
+                    text: "Ativar"
+                    md_bg_color: rgba("#c6c39a")
+                    text_color: 0,0,0,1
+                    on_release: root.ativar_evento()
+
+            MDBoxLayout:
+                orientation: "horizontal"
+                size_hint_y: None
+                height: "50dp"
+                spacing: 8
+
+                MDRaisedButton:
+                    text: "Concluir"
+                    md_bg_color: rgba("#4caf50")
+                    text_color: 1,1,1,1
+                    on_release: root.concluir_evento()
+
+                MDRaisedButton:
+                    text: "Cancelar"
+                    md_bg_color: rgba("#f44336")
+                    text_color: 1,1,1,1
+                    on_release: root.cancelar_evento()
+
+            MDRaisedButton:
+                text: "Gerar PDF"
+                size_hint_y: None
+                height: "50dp"
+                md_bg_color: rgba("#281f20")
+                text_color: 1,1,1,1
+                on_release: root.gerar_pdf()
+

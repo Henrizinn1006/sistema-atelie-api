@@ -1,0 +1,185 @@
+#:kivy 2.2.1
+#:import rgba kivy.utils.get_color_from_hex
+#:import dp kivy.metrics.dp
+
+<CustomPopup@ModalView>:
+    size_hint: .9, .55
+    auto_dismiss: False
+    background_color: 0, 0, 0, 0
+
+    MDCard:
+        orientation: "vertical"
+        radius: [25, 25, 25, 25]
+        md_bg_color: rgba("#fcf6d2")
+        padding: dp(20)
+        spacing: dp(15)
+        elevation: 6
+
+        MDLabel:
+            id: titulo_popup
+            text: root.title
+            font_style: "H6"
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: rgba("#281f20")
+            font_name: "frontend/telas/fontes/Poppins-SemiBold.ttf"
+            size_hint_y: None
+            height: dp(30)
+
+        BoxLayout:
+            id: content_box
+            orientation: "vertical"
+            spacing: dp(12)
+            padding: dp(5)
+
+        MDBoxLayout:
+            size_hint_y: None
+            height: dp(50)
+            spacing: dp(10)
+
+            MDFlatButton:
+                text: "Cancelar"
+                theme_text_color: "Custom"
+                text_color: rgba("#281f20")
+                font_name: "frontend/telas/fontes/Poppins-Regular.ttf"
+                on_release: root.dismiss()
+
+            MDRaisedButton:
+                text: "Salvar"
+                md_bg_color: rgba("#281f20")
+                text_color: 1,1,1,1
+                font_name: "frontend/telas/fontes/Poppins-SemiBold.ttf"
+                on_release: root.on_save() if hasattr(root, 'on_save') else None
+
+<MDList>:
+    md_bg_color: rgba("#fcf6d2")
+
+<CustomPopup@ModalView>:
+    size_hint: .9, .6
+    auto_dismiss: False
+
+    MDFloatLayout:
+        md_bg_color: rgba("#fcf6d2")
+        radius: [20, 20, 20, 20]
+
+        MDLabel:
+            text: root.title
+            font_style: "H6"
+            halign: "center"
+            pos_hint: {"top": 1}
+            theme_text_color: "Custom"
+            text_color: rgba("#281f20")
+            font_name: "frontend/telas/fontes/Poppins-SemiBold.ttf"
+            size_hint_y: None
+            height: dp(50)
+
+        BoxLayout:
+            id: content_box
+            orientation: "vertical"
+            padding: dp(16)
+            spacing: dp(12)
+            pos_hint: {"center_x": .5, "center_y": .45}
+
+        MDRaisedButton:
+            text: "Salvar"
+            md_bg_color: rgba("#281f20")
+            text_color: 1,1,1,1
+            pos_hint: {"center_x": .5, "y": 0.02}
+            font_name: "frontend/telas/fontes/Poppins-SemiBold.ttf"
+
+<CatalogoScreen>:
+    MDFloatLayout:
+
+        Image:
+            source: "telas/imagens/fundo.png"
+            allow_stretch: True
+            keep_ratio: False
+            size_hint: 2, 2
+
+        MDTopAppBar:
+            title: "Catálogo"
+            elevation: 0
+            md_bg_color: rgba("#fbe2b9")
+            specific_text_color: rgba("#281f20")
+            pos_hint: {"top": 1}
+            left_action_items: [["arrow-left", lambda x: setattr(root.manager, "current", "home")]]
+
+        BoxLayout:
+            orientation: "vertical"
+            padding: dp(16), dp(90), dp(16), dp(16)
+            spacing: dp(10)
+
+            MDLabel:
+                text: "Categorias"
+                font_style: "H6"
+                font_name: "telas/fontes/Poppins-SemiBold.ttf"
+                theme_text_color: "Custom"
+                text_color: rgba("#281f20")
+                size_hint_y: None
+                height: dp(30)
+
+            ScrollView:
+                do_scroll_x: False
+
+                MDList:
+                    id: lista_categorias
+
+
+        MDFloatingActionButton:
+            icon: "plus"
+            md_bg_color: rgba("#281f20")
+            elevation: 0
+            shadow_radius: 0
+            shadow_softness: 0
+            shadow_color: 0,0,0,0
+            pos_hint: {"right": 0.97, "y": 0.02}
+            on_release: root.popup_adicionar_categoria()
+
+
+<ItensCategoriaScreen>:
+    MDFloatLayout:
+
+        Image:
+            source: "telas/imagens/fundo.png"
+            allow_stretch: True
+            keep_ratio: False
+            size_hint: 2, 2
+
+        MDTopAppBar:
+            title: root.nome_categoria if root.nome_categoria else "Itens"
+            elevation: 0
+            md_bg_color: rgba("#fbe2b9")
+            specific_text_color: rgba("#281f20")
+            pos_hint: {"top": 1}
+            left_action_items: [["arrow-left", lambda x: root.voltar()]]
+
+        BoxLayout:
+            orientation: "vertical"
+            padding: dp(16), dp(90), dp(16), dp(16)
+            spacing: dp(10)
+
+            MDLabel:
+                text: "Itens cadastrados"
+                font_style: "Subtitle1"
+                font_name: "telas/fontes/Poppins-SemiBold.ttf"
+                theme_text_color: "Custom"
+                text_color: rgba("#281f20")
+                size_hint_y: None
+                height: dp(30)
+
+            ScrollView:
+                do_scroll_x: False
+
+                MDList:
+                    id: lista_itens
+
+
+        MDFloatingActionButton:
+            icon: "plus"
+            md_bg_color: rgba("#281f20")
+            elevation: 0
+            shadow_radius: 0
+            shadow_softness: 0
+            shadow_color: 0,0,0,0
+            pos_hint: {"right": 0.97, "y": 0.02}
+            on_release: root.popup_adicionar()
